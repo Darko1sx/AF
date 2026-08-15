@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع أجوان ✨</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #ffdeeb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #ffa8ce;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            width: 320px;
+            color: white;
+            border: 3px solid #fff;
+        }
+        .avatar {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        .btn {
+            background: #ff529a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.03);
+            background: #ff3385;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        .poem {
+            font-size: 15px;
+            line-height: 1.8;
+            white-space: pre-line;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- الخطوة الأولى -->
+    <div id="step1" class="step active">
+        <p style="font-size: 20px; font-weight: bold;">أنتِ أجوان؟</p>
+        <button class="btn" onclick="nextStep(2)">هلو أجوان 👋</button>
+    </div>
+
+    <!-- الخطوة الثانية -->
+    <div id="step2" class="step">
+        <p>أجوان عندي سؤال إلكِ..</p>
+        <button class="btn" onclick="nextStep(3)">شنو هو؟ 🤔</button>
+    </div>
+
+    <!-- الخطوة الثالثة -->
+    <div id="step3" class="step">
+        <p>بس مستحية أسألكِ إياه 🙈</p>
+        <button class="btn" onclick="nextStep(4)">اسأليني 💕</button>
+    </div>
+
+    <!-- الخطوة الرابعة -->
+    <div id="step4" class="step">
+        <p>تحبيني لو لا؟ 🥺</p>
+        <button class="btn" onclick="nextStep(5)">مدري 💖</button>
+    </div>
+
+    <!-- الخطوة الخامسة -->
+    <div id="step5" class="step">
+        <p>إذا تحبيني دوسي على القلب 💗</p>
+        <button class="btn" style="font-size: 24px;" onclick="nextStep(6)">💖</button>
+    </div>
+
+    <!-- الخطوة الأخيرة (الرسالة/الشعر) -->
+    <div id="step6" class="step">
+        <div class="poem">
+            في حبكِ ماذا أقول؟
+            القلمُ حائرٌ بين السطور
+            أرسمُ ورداً فلديكِ أطيبُ العطور
+            أعشقكِ وأحبكِ 💖✨
+        </div>
+        <button class="btn" onclick="nextStep(1)">العودة للبداية 🔄</button>
+    </div>
+</div>
+
+<script>
+    function nextStep(stepNumber) {
+        document.querySelectorAll('.step').forEach(step => {
+            step.classList.remove('active');
+        });
+        document.getElementById('step' + stepNumber).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
+
