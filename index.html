@@ -68,12 +68,6 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        audio {
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 20px;
-            height: 35px;
-        }
     </style>
 </head>
 <body>
@@ -109,12 +103,12 @@
 
     <!-- الخطوة الخامسة -->
     <div id="step5" class="step">
-        <img class="avatar" src="https://i.ibb.co/005rGxg/kitty4.png" alt="Hello Kitty Love">
+        <img class="avatar" src="3.jpg" alt="Hello Kitty Love">
         <p>إذا تحبيني دوسي على القلب 💗</p>
         <button class="btn" style="font-size: 24px;" onclick="nextStep(6); playMusic();">💖</button>
     </div>
 
-    <!-- الخطوة الأخيرة (الرسالة/الشعر + المشغل) -->
+    <!-- الخطوة الأخيرة (الرسالة/الشعر) -->
     <div id="step6" class="step">
         <img class="avatar" style="width: 130px; height: 130px;" src="3.jpg" alt="Hello Kitty Cute">
         <div class="poem">
@@ -125,17 +119,31 @@
 لَوْ طَالَعَتْ عَيْنَاكِ شَمْساً فِي العُلَى
 لَاسْتَسْلَمَتْ خَجَلاً وَطَأْطَأَتِ الجَبِينَا ❤️
         </div>
-        
-        <!-- مشغل الصوت (اشتغل تلقائي بس تدوس على القلب) -->
-        <audio id="bgMusic" loop controls>
-            <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-2522.mp3" type="audio/mpeg">
-        </audio>
 
         <button class="btn" onclick="nextStep(1); stopMusic();">العودة للبداية 🔄</button>
     </div>
 </div>
 
+<!-- مشغل يوتيوب مخفي بالخلفية -->
+<div id="ytplayer" style="display:none;"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('ytplayer', {
+            height: '0',
+            width: '0',
+            videoId: 'FcUCHQ-MhI4',
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': 'FcUCHQ-MhI4'
+            }
+        });
+    }
+
     function nextStep(stepNumber) {
         document.querySelectorAll('.step').forEach(step => {
             step.classList.remove('active');
@@ -144,14 +152,15 @@
     }
 
     function playMusic() {
-        var music = document.getElementById("bgMusic");
-        music.play();
+        if (player && player.playVideo) {
+            player.playVideo();
+        }
     }
 
     function stopMusic() {
-        var music = document.getElementById("bgMusic");
-        music.pause();
-        music.currentTime = 0;
+        if (player && player.stopVideo) {
+            player.stopVideo();
+        }
     }
 </script>
 
