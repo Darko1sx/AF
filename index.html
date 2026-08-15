@@ -23,15 +23,16 @@
             border-radius: 25px;
             box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
             text-align: center;
-            width: 320px;
+            width: 330px;
             color: white;
             border: 3px solid #fff;
         }
         .avatar {
-            width: 180px;
-            height: 180px;
+            width: 170px;
+            height: 170px;
             object-fit: contain;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
         }
         .btn {
             background: #ff529a;
@@ -58,12 +59,20 @@
             display: block;
         }
         .poem {
-            font-size: 15px;
-            line-height: 1.8;
+            font-size: 14px;
+            line-height: 1.9;
             white-space: pre-line;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             padding: 15px;
-            border-radius: 15px;
+            border-radius: 18px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 20px;
+            height: 35px;
         }
     </style>
 </head>
@@ -72,45 +81,57 @@
 <div class="card">
     <!-- الخطوة الأولى -->
     <div id="step1" class="step active">
+        <img class="avatar" src="https://i.pinimg.com/originals/82/38/20/8238202932a3d76e336b28038b30e4ef.png" alt="Hello Kitty">
         <p style="font-size: 20px; font-weight: bold;">أنتِ أجوان؟</p>
         <button class="btn" onclick="nextStep(2)">هلو أجوان 👋</button>
     </div>
 
     <!-- الخطوة الثانية -->
     <div id="step2" class="step">
+        <img class="avatar" src="https://i.pinimg.com/originals/26/62/79/26627993ebdc8439e5e3b5e43c5b5aa8.png" alt="Hello Kitty Thinking">
         <p>أجوان عندي سؤال الج..</p>
         <button class="btn" onclick="nextStep(3)">شنو هو؟ 🤔</button>
     </div>
 
     <!-- الخطوة الثالثة -->
     <div id="step3" class="step">
+        <img class="avatar" src="https://i.pinimg.com/originals/58/01/7e/58017e81ff0762a439247eb954a6cf80.png" alt="Hello Kitty Shy">
         <p>بس مستحي السالج إياه 🙈</p>
         <button class="btn" onclick="nextStep(4)">اسألني 💕</button>
     </div>
 
     <!-- الخطوة الرابعة -->
     <div id="step4" class="step">
+        <img class="avatar" src="https://i.pinimg.com/originals/b5/e0/eb/b5e0eb08be2bbfa0b55502c448bb5f76.png" alt="Hello Kitty Blushing">
         <p>تحبيني لو لا؟ 🥺</p>
         <button class="btn" onclick="nextStep(5)">مدري 💖</button>
     </div>
 
     <!-- الخطوة الخامسة -->
     <div id="step5" class="step">
+        <img class="avatar" src="https://i.pinimg.com/originals/a7/67/7f/a7677f520beec1c0e0b3d8f3750036ca.png" alt="Hello Kitty Love">
         <p>إذا تحبيني دوسي على القلب 💗</p>
-        <button class="btn" style="font-size: 24px;" onclick="nextStep(6)">💖</button>
+        <button class="btn" style="font-size: 24px;" onclick="nextStep(6); playMusic();">💖</button>
     </div>
 
-    <!-- الخطوة الأخيرة (الرسالة/الشعر) -->
+    <!-- الخطوة الأخيرة (الرسالة/الشعر + المشغل) -->
     <div id="step6" class="step">
+        <img class="avatar" style="width: 130px; height: 130px;" src="https://i.pinimg.com/originals/17/80/cb/1780cb0218f26db381e4fb6932a92c30.png" alt="Hello Kitty Cute">
         <div class="poem">
-            سَلَبَتْ فُؤَادِي يَا أَجْوَانُ عُيُونُكِ
+سَلَبَتْ فُؤَادِي يَا أَجْوَانُ عُيُونُكِ
 فَغَدَوْتُ فِي بَحْرِ الغَرَامِ سَنِينَا
 يَا كَوْكَبِي الأََبْهَى وَأَكْرَمَ مَنِ انْتَهَى
 إِلَيْهِ الهَوَى، بَلْ أَعْظَمَ العَالَمِينَا
 لَوْ طَالَعَتْ عَيْنَاكِ شَمْساً فِي العُلَى
 لَاسْتَسْلَمَتْ خَجَلاً وَطَأْطَأَتِ الجَبِينَا ❤️
         </div>
-        <button class="btn" onclick="nextStep(1)">العودة للبداية 🔄</button>
+        
+        <!-- مشغل الصوت (اشتغل تلقائي بس تدوس على القلب) -->
+        <audio id="bgMusic" loop controls>
+            <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-2522.mp3" type="audio/mpeg">
+        </audio>
+
+        <button class="btn" onclick="nextStep(1); stopMusic();">العودة للبداية 🔄</button>
     </div>
 </div>
 
@@ -121,8 +142,18 @@
         });
         document.getElementById('step' + stepNumber).classList.add('active');
     }
+
+    function playMusic() {
+        var music = document.getElementById("bgMusic");
+        music.play();
+    }
+
+    function stopMusic() {
+        var music = document.getElementById("bgMusic");
+        music.pause();
+        music.currentTime = 0;
+    }
 </script>
 
 </body>
 </html>
-
